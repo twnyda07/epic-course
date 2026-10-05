@@ -1,0 +1,184 @@
+{
+  "meta": {
+    "來源": "2026.10月 EPIC 禪藝實相人文空間 月曆（使用者提供之印刷稿圖檔）",
+    "轉錄日期": "2026-10-05",
+    "轉錄原則": "逐格照抄，不推算、不補字。圖上沒有的欄位一律 null，不自行填入。",
+    "版本": 1
+  },
+
+  "categories": [
+    { "id": "am",      "name": "上午課程", "color": "#C9A227" },
+    { "id": "pm",      "name": "下午課程", "color": "#4A7FB5" },
+    { "id": "night",   "name": "晚間課程", "color": "#6B4E9B" },
+    { "id": "special", "name": "特別活動", "color": "#C2703D" },
+    { "id": "lecture", "name": "假日講座", "color": "#3C7A9E" },
+    { "id": "fahui",   "name": "祈福法會", "color": "#A8812B" }
+  ],
+
+  "venues": [
+    { "id": "epic",   "name": "EPIC 禪藝實相人文空間", "address": "台中市西區台灣大道二段307號15樓", "phone": "(04)23289566", "capacity": null, "note": "月曆主辦場地" },
+    { "id": "online", "name": "線上課程", "address": null, "phone": null, "capacity": null, "note": "月曆標「線上課程」者" },
+    { "id": "banshu", "name": "板樹體育館", "address": "新北市板橋區溪城路90號", "phone": null, "capacity": null, "note": "楞嚴神奇大法會／三皈五戒在家菩薩戒場地" },
+    { "id": "dulan",  "name": "台東都蘭 寶嚴山寶嚴禪寺", "address": "台東縣東河鄉都蘭村南村路163之3號", "phone": null, "capacity": null, "note": "千人動土大典基地（月曆活動預報）" }
+  ],
+
+  "teachers": [
+    { "id": "jianhui",      "name": "見輝法師",     "title": null, "note": null },
+    { "id": "linaiyan",     "name": "林爱言老師",   "title": null, "note": "月曆印「爱」字，照原文保留" },
+    { "id": "xiedaicheng",  "name": "謝岱成",       "title": null, "note": "藝術展《自然地》個展作者" },
+    { "id": "wangshengyue", "name": "王聖岳老師",   "title": null, "note": null },
+    { "id": "lu",           "name": "陸永富總經理", "title": "威毅建築團隊創辦人", "note": "職稱取自 10/31 假日講座欄" }
+  ],
+
+  "recurring": [
+    { "id": "r-mon-1215", "title": "氣韻漫舞", "weekday": 1, "start": "12:15", "end": "13:30",
+      "teacherId": "linaiyan", "venueId": "epic", "category": "pm", "capacity": null,
+      "確認出現日期": ["2026-10-05", "2026-10-12", "2026-10-19"],
+      "note": "10/26 該格為三皈五戒，未見此課" },
+
+    { "id": "r-mon-1930", "title": "從禪觀與佛教心理看見自己", "weekday": 1, "start": "19:30", "end": "21:30",
+      "teacherId": null, "venueId": "epic", "category": "night", "capacity": null,
+      "確認出現日期": ["2026-10-05", "2026-10-12", "2026-10-19"],
+      "note": "右側固定課程欄縮寫作「從禪觀與佛教心理見自己」；講師未標示" },
+
+    { "id": "r-tue-1930", "title": "瑜伽師地論", "weekday": 2, "start": "19:30", "end": "21:30",
+      "teacherId": "jianhui", "venueId": "online", "category": "night", "capacity": null,
+      "確認出現日期": ["2026-10-06", "2026-10-13", "2026-10-20"],
+      "note": "標示「線上課程」。10/27 該格為空，未見此課" },
+
+    { "id": "r-wed-1215", "title": "氣韻漫舞", "weekday": 3, "start": "12:15", "end": "13:30",
+      "teacherId": "linaiyan", "venueId": "epic", "category": "pm", "capacity": null,
+      "確認出現日期": ["2026-10-07", "2026-10-14", "2026-10-21"],
+      "note": "10/28 該格未見此課" },
+
+    { "id": "r-wed-1400", "title": "因陀羅網工藝教室", "weekday": 3, "start": "14:00", "end": "16:00",
+      "teacherId": null, "venueId": "epic", "category": "pm", "capacity": null,
+      "確認出現日期": ["2026-10-07", "2026-10-14", "2026-10-21", "2026-10-28"],
+      "note": "講師未標示" },
+
+    { "id": "r-wed-1930", "title": "英文禪修", "weekday": 3, "start": "19:30", "end": "21:30",
+      "teacherId": null, "venueId": "epic", "category": "night", "capacity": null,
+      "確認出現日期": ["2026-10-07", "2026-10-14", "2026-10-21", "2026-10-28"],
+      "note": "講師未標示" },
+
+    { "id": "r-thu-1400", "title": "因陀羅網工藝教室", "weekday": 4, "start": "14:00", "end": "16:00",
+      "teacherId": null, "venueId": "epic", "category": "pm", "capacity": null,
+      "確認出現日期": ["2026-10-08", "2026-10-15", "2026-10-22", "2026-10-29"],
+      "note": "講師未標示" },
+
+    { "id": "r-thu-1930", "title": "華嚴經中的藝術禪觀", "weekday": 4, "start": "19:30", "end": "21:30",
+      "teacherId": null, "venueId": "epic", "category": "night", "capacity": null,
+      "確認出現日期": ["2026-10-08", "2026-10-15", "2026-10-22", "2026-10-29"],
+      "note": "講師未標示" },
+
+    { "id": "r-fri-1930", "title": "菩薩戒誦戒與研戒", "weekday": 5, "start": "19:30", "end": "21:30",
+      "teacherId": null, "venueId": "epic", "category": "night", "capacity": null,
+      "確認出現日期": ["2026-10-02", "2026-10-09", "2026-10-16", "2026-10-23", "2026-10-30"],
+      "note": "講師未標示" },
+
+    { "id": "r-sun-0900", "title": "兒童哲學與心力量", "weekday": 0, "start": "09:00", "end": "17:00",
+      "teacherId": null, "venueId": "epic", "category": "am", "capacity": null,
+      "確認出現日期": ["2026-10-04", "2026-10-11", "2026-10-18"],
+      "note": "10/25 為楞嚴神奇大法會期間，該格未見此課；講師未標示" }
+  ],
+
+  "events": [
+    { "id": "e-art-exhibition", "title": "讓畫長成自己的樣子──謝岱成《自然地》個展",
+      "dateStart": "2026-10-01", "dateEnd": "2026-11-15", "start": null, "end": null,
+      "teacherId": "xiedaicheng", "venueId": "epic", "category": "special", "capacity": null,
+      "note": "展期。取自右側「藝術展」欄" },
+
+    { "id": "e-1010-opening", "title": "謝岱成 藝術展 開幕會",
+      "dateStart": "2026-10-10", "dateEnd": "2026-10-10", "start": "14:00", "end": "15:30",
+      "teacherId": "xiedaicheng", "venueId": "epic", "category": "special", "capacity": null,
+      "note": null },
+
+    { "id": "e-1011-qiye", "title": "見輝法師 企業專班（剛剛好的般若）",
+      "dateStart": "2026-10-11", "dateEnd": "2026-10-11", "start": "09:30", "end": "14:00",
+      "teacherId": "jianhui", "venueId": "epic", "category": "lecture", "capacity": null,
+      "note": "同日 09:00-17:00 另有兒童哲學與心力量，時段重疊（見 ISSUE-6）" },
+
+    { "id": "e-lengyan-fahui", "title": "千人楞嚴誦經持咒大法會（楞嚴神奇大法會）",
+      "dateStart": "2026-10-24", "dateEnd": null, "start": null, "end": null,
+      "teacherId": null, "venueId": "banshu", "category": "fahui", "capacity": null,
+      "note": "結束日期有兩種說法，未決（見 ISSUE-1）" },
+
+    { "id": "e-sangui", "title": "三皈五戒 在家菩薩戒",
+      "dateStart": null, "dateEnd": null, "start": null, "end": null,
+      "teacherId": null, "venueId": "banshu", "category": "fahui", "capacity": null,
+      "note": "日期未決：月曆格子落在 10/26，右側欄寫 10/27（見 ISSUE-1）" },
+
+    { "id": "e-1031-ai", "title": "零基礎AI小白初學班",
+      "dateStart": "2026-10-31", "dateEnd": "2026-10-31", "start": null, "end": "12:00",
+      "teacherId": "wangshengyue", "venueId": "epic", "category": "lecture", "capacity": null,
+      "note": "開始時間未決：月曆格子寫 9:00，右側假日講座欄寫 10:00（見 ISSUE-2）" },
+
+    { "id": "e-1031-arch", "title": "談建築與美學",
+      "dateStart": "2026-10-31", "dateEnd": "2026-10-31", "start": "15:00", "end": "16:30",
+      "teacherId": "lu", "venueId": "epic", "category": "lecture", "capacity": null,
+      "note": null },
+
+    { "id": "e-1226-dongtu", "title": "萬眾一心 千鏟立基 千人動土大典",
+      "dateStart": "2026-12-25", "dateEnd": "2026-12-27", "start": null, "end": null,
+      "teacherId": null, "venueId": "dulan", "category": "special", "capacity": null,
+      "note": "活動預報。行程三天兩夜；動土大典正日 2026-12-26（六）。報名表單可登記專列車需求及上車地點" }
+  ],
+
+  "停課": [
+    { "date": "2026-10-25", "recurringId": "r-sun-0900", "reason": "楞嚴神奇大法會期間，月曆該格未排此課", "來源": "照圖" },
+    { "date": "2026-10-26", "recurringId": "r-mon-1215", "reason": "該格為三皈五戒 在家菩薩戒", "來源": "照圖" },
+    { "date": "2026-10-26", "recurringId": "r-mon-1930", "reason": "該格為三皈五戒 在家菩薩戒", "來源": "照圖" },
+    { "date": "2026-10-27", "recurringId": "r-tue-1930", "reason": "月曆該格為空", "來源": "照圖" },
+    { "date": "2026-10-28", "recurringId": "r-wed-1215", "reason": "月曆該格未見此課", "來源": "照圖" }
+  ],
+
+  "issues": [
+    { "id": "ISSUE-1", "等級": "高", "狀態": "待確認", "要問誰": "課務／法會組",
+      "標題": "法會與三皈五戒的日期，月曆格子與右側欄互相矛盾",
+      "圖上證據": [
+        "右側年度法會欄：10/24(六)-10/26(一) 楞嚴神奇大法會；10/27(六) 三皈五戒 在家菩薩戒",
+        "月曆格子 10/25 的海報圖卡印：2026.10.24-10.27 板樹體育館",
+        "月曆格子 10/26 放的是「三皈五戒 在家菩薩戒 板樹體育館」",
+        "實際星期經核對：10/26 是週一、10/27 是週二，右側欄的「10/27(六)」星期標錯"
+      ] },
+
+    { "id": "ISSUE-2", "等級": "中", "狀態": "待確認", "要問誰": "課務",
+      "標題": "10/31 零基礎AI小白初學班開始時間有兩個版本",
+      "圖上證據": [
+        "月曆格子 10/31：9:00-12:00 王聖岳老師 零基礎AI小白初學班",
+        "右側假日講座欄 10/31(六)：10:00-12:00 王聖岳老師 零基礎AI小白初學班"
+      ] },
+
+    { "id": "ISSUE-3", "等級": "高", "狀態": "待確認", "要問誰": "法會總策劃",
+      "標題": "法會月份與內部 SOP 試算表可能不一致",
+      "圖上證據": [
+        "本月曆：楞嚴神奇大法會在 2026 年 10 月，板樹體育館",
+        "另一線索（非本圖）：楞嚴大法會工作SOP 的 2026 總策劃分頁曾記為 11 月（11/17 進場～11/25 撤場）"
+      ],
+      "備註": "本系統一律以月曆印刷稿為準，不自行改寫；此條只作提醒" },
+
+    { "id": "ISSUE-4", "等級": "低", "狀態": "待確認", "要問誰": "課務",
+      "標題": "法會前後固定週課是否停課，圖上未明說",
+      "圖上證據": [
+        "10/25(日) 無兒童哲學與心力量",
+        "10/26(一) 無氣韻漫舞、無晚間課程，整格為三皈五戒",
+        "10/27(二) 無瑜伽師地論",
+        "10/28(三) 無 12:15 氣韻漫舞，但有 14:00 因陀羅網、19:30 英文禪修"
+      ],
+      "備註": "系統先照圖建為「該日停課」，不自行補課" },
+
+    { "id": "ISSUE-5", "等級": "低", "狀態": "待補", "要問誰": "課務",
+      "標題": "多門固定週課在月曆上未標講師",
+      "圖上證據": [
+        "未標講師者：從禪觀與佛教心理看見自己、因陀羅網工藝教室、英文禪修、華嚴經中的藝術禪觀、菩薩戒誦戒與研戒、兒童哲學與心力量"
+      ] },
+
+    { "id": "ISSUE-6", "等級": "中", "狀態": "待確認", "要問誰": "課務",
+      "標題": "10/11 同場地時段重疊",
+      "圖上證據": [
+        "10/11(日) 09:00-17:00 兒童哲學與心力量",
+        "10/11(日) 09:30-14:00 見輝法師 企業專班（剛剛好的般若）",
+        "兩者月曆上皆未標不同場地"
+      ] }
+  ]
+}

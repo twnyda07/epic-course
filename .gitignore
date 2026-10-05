@@ -1,0 +1,13 @@
+# 含密碼，絕不上傳
+line/設定.json
+line/.已上傳.json
+
+# 注意：config.js 要上傳（GitHub Pages 需要它才知道後端網址）。
+# 裡面只有 Web App 網址，沒有密碼；光有網址不帶密碼什麼都讀不到。
+# 真正的機密（LINE_SECRET、CHANNEL_ACCESS_TOKEN）放在 Apps Script 的指令碼屬性，不在 repo 裡。
+
+# 本機啟動器
+*.command
+
+.DS_Store
+node_modules/

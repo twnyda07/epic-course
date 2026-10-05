@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>EPIC 排課系統</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="gate">
+  <div class="box">
+    <h1>EPIC 禪藝實相人文空間</h1>
+    <div class="sub">排課系統</div>
+    <input id="pw" type="password" placeholder="請輸入密碼" autocomplete="current-password">
+    <button id="pwGo">進入</button>
+    <div class="err" id="pwErr"></div>
+  </div>
+</div>
+
+<div id="app">
+  <header class="top">
+    <h1 id="sysName">EPIC 排課系統</h1>
+    <span class="role" id="roleTag">檢視</span>
+    <span class="spacer"></span>
+    <button class="link" id="reload">重新整理</button>
+    <button class="link" id="logout">登出</button>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button data-v="cal" class="on">月曆</button>
+    <button data-v="week">週課表</button>
+    <button data-v="courses">課程</button>
+    <button data-v="people">師資與場地</button>
+    <button data-v="enroll">報名</button>
+    <button data-v="conflict">衝突檢查<span class="badge" id="bConflict" hidden></span></button>
+    <button data-v="line">LINE 提案<span class="badge" id="bLine" hidden></span></button>
+    <button data-v="issues">待確認<span class="badge" id="bIssue" hidden></span></button>
+  </nav>
+
+  <!-- 月曆 -->
+  <section class="view on" id="v-cal">
+    <div class="monthbar">
+      <button id="prevM">‹</button>
+      <h2 id="monthTitle">—</h2>
+      <button id="nextM">›</button>
+      <button class="today" id="todayM">今天</button>
+      <span class="spacer" style="flex:1"></span>
+      <button class="btn" id="printCal">列印</button>
+    </div>
+    <div id="calBanner" style="margin-bottom:.6rem"></div>
+    <div class="wrap"><table class="cal"><thead><tr>
+      <th>日 SUN</th><th>一 MON</th><th>二 TUE</th><th>三 WED</th><th>四 THU</th><th>五 FRI</th><th>六 SAT</th>
+    </tr></thead><tbody id="calBody"></tbody></table></div>
+    <div class="legend">
+      <span class="c-am">上午課程</span><span class="c-pm">下午課程</span><span class="c-night">晚間課程</span>
+      <span class="c-special">特別活動</span><span class="c-lecture">假日講座</span><span class="c-fahui">祈福法會</span>
+    </div>
+  </section>
+
+  <!-- 週課表 -->
+  <section class="view" id="v-week">
+    <div class="note">固定每週開的課。單次活動與停課不在這張表上，請看月曆。</div>
+    <div class="wrap"><table class="week" id="weekTable"></table></div>
+  </section>
+
+  <!-- 課程 -->
+  <section class="view" id="v-courses">
+    <div class="toolbar">
+      <button class="btn primary need-edit" data-new="固定週課">＋ 固定週課</button>
+      <button class="btn primary need-edit" data-new="單次活動">＋ 單次活動</button>
+      <span class="spacer"></span>
+      <input class="btn" id="qCourse" placeholder="搜尋課名／講師">
+    </div>
+    <h3 style="font-size:.95rem;margin:.4rem 0 .6rem">固定週課</h3>
+    <div class="wrap"><table class="grid" id="tRecurring"></table></div>
+    <h3 style="font-size:.95rem;margin:1.6rem 0 .6rem">單次活動</h3>
+    <div class="wrap"><table class="grid" id="tEvents"></table></div>
+    <h3 style="font-size:.95rem;margin:1.6rem 0 .6rem">停課與異動</h3>
+    <div class="wrap"><table class="grid" id="tOverrides"></table></div>
+  </section>
+
+  <!-- 師資場地 -->
+  <section class="view" id="v-people">
+    <div class="toolbar">
+      <button class="btn primary need-edit" data-new="師資">＋ 師資</button>
+      <button class="btn primary need-edit" data-new="場地">＋ 場地</button>
+    </div>
+    <h3 style="font-size:.95rem;margin:.4rem 0 .6rem">師資</h3>
+    <div class="wrap"><table class="grid" id="tTeachers"></table></div>
+    <h3 style="font-size:.95rem;margin:1.6rem 0 .6rem">場地</h3>
+    <div class="wrap"><table class="grid" id="tVenues"></table></div>
+  </section>
+
+  <!-- 報名 -->
+  <section class="view" id="v-enroll">
+    <div class="toolbar">
+      <button class="btn primary need-edit" id="newEnroll">＋ 登記報名</button>
+      <span class="spacer"></span>
+      <select class="btn" id="enrollFilter"><option value="">全部狀態</option><option>已報名</option><option>候補</option><option>取消</option></select>
+    </div>
+    <div class="wrap"><table class="grid" id="tEnroll"></table></div>
+  </section>
+
+  <!-- 衝突 -->
+  <section class="view" id="v-conflict">
+    <div class="note"><strong>查的是什麼：</strong>同一天同場地時段重疊、同一位老師同時段撞堂、固定週課排在法會期間。線上課程不列入場地衝突。</div>
+    <div class="toolbar">
+      <span>期間</span>
+      <input class="btn" type="date" id="cFrom"><span>至</span><input class="btn" type="date" id="cTo">
+      <button class="btn" id="runConflict">檢查</button>
+    </div>
+    <div id="conflictOut"><div class="empty">按「檢查」開始</div></div>
+  </section>
+
+  <!-- LINE 提案 -->
+  <section class="view" id="v-line">
+    <div class="note warn">
+      <strong>這裡的每一筆都只是「機器從 LINE 訊息猜出來的提案」，不是已生效的異動。</strong>
+      群組裡的閒聊、玩笑、反問句，機器分不出來，所以一律要人看過才算數。按「套用」才會真的動到課表。
+    </div>
+    <div class="toolbar">
+      <select class="btn" id="pFilter"><option value="待審">待審</option><option value="">全部</option><option value="已套用">已套用</option><option value="已駁回">已駁回</option></select>
+    </div>
+    <div class="wrap"><table class="grid" id="tProposals"></table></div>
+  </section>
+
+  <!-- 待確認 -->
+  <section class="view" id="v-issues">
+    <div class="note"><strong>這些是建檔時發現、但資料本身互相矛盾或缺漏的地方。</strong>系統沒有自行決定答案，請跟課務確認後再進來改。</div>
+    <div id="issueOut"></div>
+  </section>
+</div>
+
+<div id="modal"><div class="box">
+  <h3 id="mTitle">編輯</h3>
+  <div id="mBody"></div>
+  <div class="modal-foot">
+    <button class="btn danger" id="mDelete" hidden>刪除</button>
+    <span style="flex:1"></span>
+    <button class="btn" id="mCancel">取消</button>
+    <button class="btn primary" id="mSave">儲存</button>
+  </div>
+</div></div>
+
+<div id="toast"></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
