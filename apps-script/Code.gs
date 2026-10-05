@@ -140,6 +140,12 @@ function sheet_(name) {
 
 /** 建立所有分頁與預設設定；重複執行安全。 */
 function setup_() {
+  // 用 API 建立的試算表預設時區是 UTC，先扳正，之後新輸入的時間才不會再歪
+  var ss0 = ss_();
+  if (ss0.getSpreadsheetTimeZone() !== 'Asia/Taipei') {
+    ss0.setSpreadsheetTimeZone('Asia/Taipei');
+    _tz = null;
+  }
   Object.keys(SHEETS).forEach(function (n) { sheet_(n); });
   var sh = sheet_('設定');
   var existing = readSheet_('設定').reduce(function (m, r) { m[r.key] = true; return m; }, {});
@@ -180,7 +186,7 @@ function readSheet_(name) {
     for (var c = 0; c < head.length; c++) {
       if (!head[c]) continue;
       var v = values[i][c];
-      if (v instanceof Date) v = Utilities.formatDate(v, 'Asia/Taipei', 'yyyy-MM-dd');
+      if (v instanceof Date) v = dateOut_(v);
       o[head[c]] = v === '' ? null : v;
       if (v !== '') blank = false;
     }
@@ -188,6 +194,32 @@ function readSheet_(name) {
     if (!blank) out.push(o);
   }
   return out;
+}
+
+/**
+ * 試算表的 Date 值轉字串。
+ *
+ * ⚠️ 這裡有個會咬人的坑：你在儲存格打「09:00」，Google 試算表會把它
+ *    當成「時間」存起來，底層是 1899-12-30T09:00 這個紀元日期。
+ *    如果一律用 yyyy-MM-dd 格式化，09:00 會變成 "1899-12-30"，時間整個不見，
+ *    課表時段、衝突檢查就全部失效。所以要分三種情況處理。
+ */
+function dateOut_(d) {
+  // ⚠️ 第二個坑：一定要用「試算表自己的時區」，不能寫死 Asia/Taipei。
+  //    用 API 建立的試算表預設是 UTC，儲存格裡的 12:15 會被交成 1899-12-30T12:15Z，
+  //    若用台北時區格式化就變成 20:15，整份課表集體偏移 8 小時。
+  var tz = sheetTz_();
+  if (d.getFullYear() < 1900) return Utilities.formatDate(d, tz, 'HH:mm');          // 純時間
+  if (Utilities.formatDate(d, tz, 'HHmmss') !== '000000') {
+    return Utilities.formatDate(d, tz, 'yyyy-MM-dd HH:mm:ss');                      // 日期＋時間
+  }
+  return Utilities.formatDate(d, tz, 'yyyy-MM-dd');                                 // 純日期
+}
+
+var _tz = null;
+function sheetTz_() {
+  if (!_tz) _tz = ss_().getSpreadsheetTimeZone() || 'Asia/Taipei';
+  return _tz;
 }
 
 function readAll_() {
