@@ -252,8 +252,20 @@ function now_() {
 
 /* ═════════════════════════ 設定與密碼 ═════════════════════════ */
 
+/**
+ * 讀設定。
+ *
+ * 第一次部署時「設定」分頁是空的 → 裡面還沒有密碼 → 任何密碼都驗不過
+ * → 連初始化都呼叫不了，變成先有雞先有蛋。所以這裡偵測到空表就自己初始化一次。
+ * setup_() 只會補不存在的鍵，重跑安全。
+ */
 function settings_() {
-  return readSheet_('設定').reduce(function (m, r) { m[r.key] = r.value; return m; }, {});
+  var rows = readSheet_('設定');
+  if (!rows.length) {
+    setup_();
+    rows = readSheet_('設定');
+  }
+  return rows.reduce(function (m, r) { m[r.key] = r.value; return m; }, {});
 }
 
 function publicSettings_() {

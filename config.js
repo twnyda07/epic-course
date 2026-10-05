@@ -6,6 +6,6 @@
  * 這裡只有 Web App 網址，沒有密碼——光有網址不帶密碼，後端什麼都不會給。
  */
 window.CFG = {
-  API: 'https://script.google.com/macros/s/AKfycbww1arnKAOnnjUe1nInqr8LvOutIzkvWGzsCm8wkenpgwRpr0pvfIbwC_LaVhPV2maw/exec',
+  API: 'https://script.google.com/macros/s/AKfycbxzdmqmbs1a558m9eW0IG-O-jbsP3L0t7UDFGJjZRT0UVR9cYdJX9NraWFhGJjRXAA3/exec',
   標題: 'EPIC 禪藝實相人文空間　排課系統'
 };
