@@ -20,6 +20,15 @@
 
 var PROPS = PropertiesService.getScriptProperties();
 
+/**
+ * 資料庫試算表 ID。
+ *
+ * 為什麼寫死在這裡而不是只靠指令碼屬性：少一個部署時會忘記的手動步驟。
+ * 這不是機密——知道 ID 也打不開，試算表本身是私有的，只有擁有者看得到。
+ * 要換資料庫時，設指令碼屬性 SHEET_ID 就會蓋過這個預設值。
+ */
+var SHEET_ID_DEFAULT = '1Xk_tzNZLK4Up84UsxXtj_4nM-FncI160Yrpq9bQDfFA';
+
 var SHEETS = {
   設定:     ['key', 'value', '說明'],
   場地:     ['id', '名稱', '地址', '電話', '容納人數', '備註', '停用'],
@@ -103,15 +112,19 @@ function route_(req) {
 /* ═════════════════════════ 試算表基礎 ═════════════════════════ */
 
 /**
- * 本專案是「綁在試算表上」的指令碼，所以直接拿當前試算表就好。
- * 若日後改成獨立指令碼，設一個 Script Property「SHEET_ID」即可。
+ * 本專案刻意做成**獨立指令碼**（不綁在試算表上），用 openById 連資料庫。
+ *
+ * ⚠️ 為什麼不綁：綁在試算表上的指令碼，它的 Web App 會繼承容器檔案的存取權。
+ *    試算表是私有的 → 匿名請求一律被 Google 擋在「存取遭拒」頁，
+ *    公開網站（GitHub Pages）就連不到後端。這點實測過才確定。
+ *
+ * ⚠️ 代價：openById 需要 .../auth/spreadsheets（帳號下所有試算表），
+ *    沒辦法只要 spreadsheets.currentonly（只有這一本）。
+ *    「公開網站連得到後端」與「最小權限」在 Apps Script 上不能兼得，
+ *    這裡選了前者。資料本身仍受密碼保護，試算表也仍是私有的。
  */
 function ss_() {
-  var id = PROPS.getProperty('SHEET_ID');
-  if (id) return SpreadsheetApp.openById(id);
-  var active = SpreadsheetApp.getActiveSpreadsheet();
-  if (active) return active;
-  throw new Error('找不到試算表：本指令碼未綁定試算表，也沒有設定 Script Property「SHEET_ID」');
+  return SpreadsheetApp.openById(PROPS.getProperty('SHEET_ID') || SHEET_ID_DEFAULT);
 }
 
 function sheet_(name) {
@@ -142,10 +155,15 @@ function setup_() {
   return { ok: true, message: '分頁與預設設定已就緒' };
 }
 
-/** 給選單用的手動初始化（底線結尾的函式不會出現在執行選單）。 */
+/**
+ * 從編輯器手動跑的初始化。
+ * （底線結尾的函式不會出現在執行選單，所以才另外包一層。
+ *   獨立指令碼沒有 SpreadsheetApp.getUi()，結果印在執行記錄裡。）
+ */
 function 一鍵初始化() {
   var r = setup_();
-  SpreadsheetApp.getUi().alert(r.message);
+  Logger.log(r.message);
+  return r;
 }
 
 function readSheet_(name) {
@@ -521,10 +539,4 @@ function json(obj) {
 
 function html_(msg) {
   return HtmlService.createHtmlOutput('<p style="font-family:system-ui;padding:2rem">' + msg + '</p>');
-}
-
-function onOpen() {
-  SpreadsheetApp.getUi().createMenu('排課系統')
-    .addItem('一鍵初始化分頁', '一鍵初始化')
-    .addToUi();
 }
