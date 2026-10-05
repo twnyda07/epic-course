@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>EPIC 排課系統</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
@@ -146,7 +146,8 @@
 
 <div id="toast"></div>
 
-<script src="config.js"></script>
-<script src="app.js"></script>
+<!-- 改了 config.js／app.js 一定要把 ?v= 加 1，否則使用者的瀏覽器會繼續吃舊快取 -->
+<script src="config.js?v=2"></script>
+<script src="app.js?v=2"></script>
 </body>
 </html>
